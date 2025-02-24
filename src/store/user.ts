@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
-import { login, userLogout } from '@/api/user';
+import { login } from '@/api/user';
 import {
     getToken,
    // setToken,
     removeToken,
   //  setUserInfo,
     getUserInfo,
-    removeUserInfo
+   // removeUserInfo
 } from '@/utils/cookies';
 import Cookies from 'js-cookie';
 import { ElMessage } from 'element-plus';
@@ -68,14 +68,14 @@ export const useUserStore = defineStore('user', {
             this.avatar = avatar;
             this.introduction = introduction;
         },
-        async logOut() {
-            const { data } = await userLogout({});
-            removeToken();
-            this.token = '';
-            this.roles = [];
-            Cookies.remove('username');
-            Cookies.remove('user_info');
-            removeUserInfo();
-        }
+        // async logOut() {
+        //     const { data } = await userLogout({});
+        //     removeToken();
+        //     this.token = '';
+        //     this.roles = [];
+        //     Cookies.remove('username');
+        //     Cookies.remove('user_info');
+        //     removeUserInfo();
+        // }
     }
 });

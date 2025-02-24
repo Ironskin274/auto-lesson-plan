@@ -1,24 +1,31 @@
 import md5 from 'md5';
 
-//根据请求的地址，方式，参数，统一计算出当前请求的md5值作为key
-const getRequestKey = (config) => {
+// 定义请求配置的类型
+interface RequestConfig {
+    url: string;
+    method: string;
+    data?: string | Record<string, any>;
+}
+
+// 根据请求的地址，方式，参数，统一计算出当前请求的 md5 值作为 key
+const getRequestKey = (config?: RequestConfig): string => {
     if (!config) {
         // 如果没有获取到请求的相关配置信息，根据时间戳生成
-        return md5(+new Date());
+        return md5(new Date().toISOString());
     }
 
     const data = typeof config.data === 'string' ? config.data : JSON.stringify(config.data);
-    // console.log(config,pending,config.url,md5(config.url + '&' + config.method + '&' + data),'config')
     return md5(config.url + '&' + config.method + '&' + data);
-}
+};
 
-// 存储key值
-const pending = {};
-// 检查key值
-const checkPending = (key) => !!pending[key];
-// 删除key值
-const removePending = (key) => {
-    // console.log(key,'key')
+// 存储 key 值
+const pending: Record<string, boolean> = {};
+
+// 检查 key 值
+const checkPending = (key: string): boolean => !!pending[key];
+
+// 删除 key 值
+const removePending = (key: string): void => {
     delete pending[key];
 };
 
@@ -27,4 +34,4 @@ export {
     pending,
     checkPending,
     removePending
-}
+};
