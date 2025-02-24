@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { useUsersStore } from '@/store/user'
+import { useUserStore } from '@/store/user'
 import {getRequestKey,removePending} from './requestOptimize'
 import router from '@/router'
 
-const UserStore = useUsersStore();
+const UserStore = useUserStore();
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
