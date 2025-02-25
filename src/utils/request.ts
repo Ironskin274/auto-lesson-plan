@@ -1,9 +1,17 @@
 import axios from 'axios'
-import { useUsersStore } from '@/store/user'
+import { useUserStore } from '@/store/user'
 import {getRequestKey,removePending} from './requestOptimize'
 import router from '@/router'
 
-const UserStore = useUsersStore();
+/*
+解决方案
+在路由钩子函数进行用户状态模块的获取，调用路由钩子的时候
+，意味着全局状态已完全初始化完成。但会造成每次调用路由钩子都获取用户状态模块，
+会造成资源的浪费（当然可以达到预期目的，但并不是我们需要的）。我们可以在外层声明一个变量用来存储状态
+，在路由钩子中进行判断，如果当前变量为空，也就意味着状态还没有进行过获取，在当前情况下进行状态获取
+（类似于单例）。
+ */
+let UserStore : any = null
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -13,6 +21,9 @@ const service = axios.create({
 // Request interceptors 请求拦截器，对每一个请求加上token以便后端校验
 service.interceptors.request.use(
   (config: any) => {
+      if(UserStore == null) {
+          UserStore = useUserStore()
+      }
     // Add X-Access-Token header to every request, you can add other custom headers here
     if (UserStore.token) {
       config.headers['token'] = UserStore.token
@@ -30,6 +41,9 @@ service.interceptors.request.use(
 // Response interceptors
 service.interceptors.response.use(
   (response: any) => {
+      if(UserStore == null) {
+          UserStore = useUserStore()
+      }
     // console.log(response, 'response')
     if (response.data.status === 401) {
       router.push('/login')

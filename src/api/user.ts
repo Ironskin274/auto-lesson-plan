@@ -12,6 +12,14 @@ export const login = (data: any) =>
         'data': data
     })
 
+// 注册
+export const register = (data: any) =>
+    request({
+        'url': '/user/register',
+        'method': 'post',
+        'data': data
+    })
+
 // 退出
 export const userLogout = (params: any) =>
     request({

@@ -3,8 +3,11 @@
 </script>
 
 <template>
-  <router-view></router-view>
+<div>
+  教案对比
+</div>
 </template>
 
 <style scoped>
+
 </style>

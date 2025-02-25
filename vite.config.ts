@@ -6,7 +6,8 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [
-      VueRouter(),
+      VueRouter({
+      }),
     Vue(),
     vitePluginBabel({
       babelConfig: {
@@ -33,6 +34,13 @@ export default defineConfig({
         target: 'http://another-server.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/another-api/, '')
+      }
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+       // additionalData: '@import "@/styles/global.scss";'
       }
     }
   }

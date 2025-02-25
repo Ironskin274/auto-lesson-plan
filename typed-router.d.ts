@@ -19,7 +19,11 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '/about': RouteRecordInfo<'/about', '/about', Record<never, never>, Record<never, never>>,
-    '/users/[id]': RouteRecordInfo<'/users/[id]', '/users/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/dashboard/components/asrClassPlan': RouteRecordInfo<'/dashboard/components/asrClassPlan', '/dashboard/components/asrClassPlan', Record<never, never>, Record<never, never>>,
+    '/dashboard/components/compareClassPlans': RouteRecordInfo<'/dashboard/components/compareClassPlans', '/dashboard/components/compareClassPlans', Record<never, never>, Record<never, never>>,
+    '/dashboard/components/myClassPlans': RouteRecordInfo<'/dashboard/components/myClassPlans', '/dashboard/components/myClassPlans', Record<never, never>, Record<never, never>>,
+    '/dashboard/components/newClassPlan': RouteRecordInfo<'/dashboard/components/newClassPlan', '/dashboard/components/newClassPlan', Record<never, never>, Record<never, never>>,
+    '/dashboard/components/register': RouteRecordInfo<'/dashboard/components/register', '/dashboard/components/register', Record<never, never>, Record<never, never>>,
+    '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
   }
 }
