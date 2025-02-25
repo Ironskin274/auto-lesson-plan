@@ -35,3 +35,11 @@ export const getUserList = (params: any) =>
         'method': 'get',
         'params': params
     })
+
+// 注册
+export const register = (data: any) =>
+    request({
+        url: '/user/register',
+        method: 'post',
+        data: data,
+    });
